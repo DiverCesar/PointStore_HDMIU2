@@ -87,15 +87,15 @@ router.get(`/${process.env.APP_NAME}/${process.env.ITEM_PLURAL}/categories`, asy
 router.get(`/${process.env.APP_NAME}/${process.env.ITEM_PLURAL}/category/:status`, async (req, res) => {
     try {
         const { status } = req.params;
-        if (status !== 'valid' && status !== 'invalid') {
-            return res.status(400).json({ error: "Invalid status" });
+        if (status !== 'new' && status !== 'older') {
+            return res.status(400).json({ error: "Invalid status. Use 'new' or 'older'." });
         }
         
         const data = await fetchData();
         const sortedData = parseAndSortData(data);
-        const isTargetActive = status === 'valid';
+        const isTargetNew = status === 'new';
         
-        const filteredData = sortedData.filter(item => item.isNew === isTargetActive).map(item => {
+        const filteredData = sortedData.filter(item => item.isNew === isTargetNew).map(item => {
             delete item.parsedDate;
             return item;
         });
