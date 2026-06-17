@@ -72,7 +72,7 @@ router.get(`/${process.env.APP_NAME}/${process.env.ITEM_PLURAL}/categories`, asy
             if (item.isNew) acc.active.push(item);
             else acc.inactive.push(item);
             return acc;
-        }, { active: [], inactive: [] });
+        }, { news: [], olders: [] });
         
         res.json(result);
     } catch (error) {
