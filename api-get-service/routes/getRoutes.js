@@ -45,18 +45,22 @@ router.get(`/${process.env.APP_NAME}/${process.env.ITEM_PLURAL}`, async (req, re
     }
 });
 
-router.get(`/${process.env.APP_NAME}/${process.env.ITEM_PLURAL}/ordered`, async (req, res) => {
+router.get(`/${process.env.APP_NAME}/${process.env.ITEM_PLURAL}/categories`, async (req, res) => {
     try {
         const data = await fetchData();
         const sortedData = parseAndSortData(data);
         
-        const finalData = sortedData.map(item => {
-            const addedAgo = calculateTimeElapsed(item.date);
+        const result = sortedData.reduce((acc, item) => {
             delete item.parsedDate;
-            return { ...item, addedAgo };
-        });
+            if (item.isNew) {
+                acc.news.push(item);
+            } else {
+                acc.olders.push(item);
+            }
+            return acc;
+        }, { news: [], olders: [] });
         
-        res.json(finalData);
+        res.json(result);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
