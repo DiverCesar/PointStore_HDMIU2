@@ -1,2 +1,2 @@
-# PointStore_HDMIU2
-ESPE AWDExam for unit 2
+# exam_u2_template
+Project practice for ESPE - AWD 30716 April - July 2026
