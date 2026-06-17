@@ -69,7 +69,7 @@ router.get(`/${process.env.APP_NAME}/${process.env.ITEM_PLURAL}/categories`, asy
         
         const result = sortedData.reduce((acc, item) => {
             delete item.parsedDate;
-            if (item.isActive) acc.active.push(item);
+            if (item.isNew) acc.active.push(item);
             else acc.inactive.push(item);
             return acc;
         }, { active: [], inactive: [] });
@@ -91,7 +91,7 @@ router.get(`/${process.env.APP_NAME}/${process.env.ITEM_PLURAL}/category/:status
         const sortedData = parseAndSortData(data);
         const isTargetActive = status === 'valid';
         
-        const filteredData = sortedData.filter(item => item.isActive === isTargetActive).map(item => {
+        const filteredData = sortedData.filter(item => item.isNew === isTargetActive).map(item => {
             delete item.parsedDate;
             return item;
         });
