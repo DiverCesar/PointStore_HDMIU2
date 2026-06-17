@@ -9,7 +9,7 @@ const dataSchema = new mongoose.Schema(
         price: { type: Number },
         date: { type: String, required: true },
         description: { type: String },
-        isActive: { type: Boolean, required: true }
+        isNew: { type: Boolean, required: true }
     },
     { 
         collection: process.env.ITEM_PLURAL,
