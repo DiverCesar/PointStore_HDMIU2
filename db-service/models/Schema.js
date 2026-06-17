@@ -13,7 +13,8 @@ const dataSchema = new mongoose.Schema(
     },
     { 
         collection: process.env.ITEM_PLURAL,
-        versionKey: false
+        versionKey: false,
+        suppressReservedKeysWarning: true
     }
 );
 
